@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0d12">
+  <title>Nuestro Espacio 🤍</title>
+
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --text: #f7f7fb;
+      --muted: #a7a7b4;
+      --accent: #ff7fa8;
+      --soft: rgba(255, 127, 168, 0.14);
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(255, 127, 168, 0.14),
+          transparent 38%
+        ),
+        var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Segoe UI",
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    header {
+      text-align: center;
+      padding: 42px 10px 34px;
+    }
+
+    .heart {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: var(--soft);
+      font-size: 27px;
+      box-shadow: 0 0 45px rgba(255, 127, 168, 0.12);
+    }
+
+    h1 {
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 750;
+    }
+
+    .subtitle {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: clamp(15px, 3vw, 18px);
+    }
+
+    .people {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin: 12px auto 42px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #dedee7;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .status {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #55d98a;
+      box-shadow: 0 0 10px rgba(85, 217, 138, 0.55);
+    }
+
+    .separator {
+      color: #555562;
+    }
+
+    .rooms {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .room {
+      position: relative;
+      min-height: 190px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.018)
+        );
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .room::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      right: -45px;
+      bottom: -55px;
+      border-radius: 50%;
+      background: var(--soft);
+      filter: blur(4px);
+    }
+
+    .room:hover {
+      transform: translateY(-3px);
+      background: #20202a;
+      border-color: rgba(255, 127, 168, 0.22);
+    }
+
+    .room:active {
+      transform: scale(0.985);
+    }
+
+    .icon {
+      display: block;
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .room h2,
+    .us h2 {
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .room p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 270px;
+    }
+
+    .coming {
+      margin-top: 16px;
+      color: #777783;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .us {
+      margin-top: 16px;
+      padding: 25px;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid rgba(255, 127, 168, 0.18);
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 127, 168, 0.10),
+          rgba(255, 255, 255, 0.025)
+        );
+    }
+
+    .us p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .us-heart {
+      font-size: 42px;
+      flex-shrink: 0;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 42px;
+      color: #5f5f6b;
+      font-size: 12px;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .app {
+        padding: 18px 15px 35px;
+      }
+
+      header {
+        padding: 34px 8px 28px;
+      }
+
+      .rooms {
+        grid-template-columns: 1fr;
+      }
+
+      .room {
+        min-height: 155px;
+      }
+
+      .us {
+        min-height: 115px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .room {
+        min-height: 215px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header>
+      <div class="heart">🤍</div>
+
+      <h1>Nuestro Espacio</h1>
+
+      <p class="subtitle">
+        Donde estamos juntos aunque estemos lejos.
+      </p>
+    </header>
+
+
+    <section class="people" aria-label="Personas en el espacio">
+
+      <div class="person">
+        <span class="status"></span>
+        Yeray
+      </div>
+
+      <span class="separator">•</span>
+
+      <div class="person">
+        <span class="status"></span>
+        Mararía
+      </div>
+
+    </section>
+
+
+    <section class="rooms" aria-label="Habitaciones">
+
+      <a
+        class="room"
+        href="#"
+        onclick="return comingSoon('Cine')"
+      >
+        <span class="icon">🎬</span>
+
+        <h2>Cine</h2>
+
+        <p>
+          Películas, series y vídeos para verlos juntos.
+        </p>
+
+        <div class="coming">
+          Próximamente
+        </div>
+      </a>
+
+
+      <a
+        class="room"
+        href="#"
+        onclick="return comingSoon('Música')"
+      >
+        <span class="icon">🎵</span>
+
+        <h2>Música</h2>
+
+        <p>
+          Escuchad canciones juntos y cread vuestra propia cola.
+        </p>
+
+        <div class="coming">
+          Próximamente
+        </div>
+      </a>
+
+
+      <a
+        class="room"
+        href="#"
+        onclick="return comingSoon('Juegos')"
+      >
+        <span class="icon">🎮</span>
+
+        <h2>Juegos</h2>
+
+        <p>
+          Un pequeño arcade para jugar juntos a distancia.
+        </p>
+
+        <div class="coming">
+          Próximamente
+        </div>
+      </a>
+
+
+      <a
+        class="room"
+        href="#"
+        onclick="return comingSoon('Chat')"
+      >
+        <span class="icon">💬</span>
+
+        <h2>Chat</h2>
+
+        <p>
+          Un lugar para hablar, reaccionar y estar juntos.
+        </p>
+
+        <div class="coming">
+          Próximamente
+        </div>
+      </a>
+
+    </section>
+
+
+    <section class="us">
+
+      <div>
+        <h2>❤️ Nosotros</h2>
+
+        <p>
+          Todo lo que hace que este espacio sea solamente nuestro.
+        </p>
+      </div>
+
+      <div class="us-heart">
+        ♡
+      </div>
+
+    </section>
+
+
+    <footer>
+      Hecho para dos personas, aunque estén lejos.
+    </footer>
+
+  </main>
+
+
+  <script>
+    function comingSoon(name) {
+      alert(
+        name +
+        " estará disponible muy pronto. " +
+        "Estamos construyendo este espacio paso a paso 🤍"
+      );
+
+      return false;
+    }
+  </script>
+
+</body>
+</html>
